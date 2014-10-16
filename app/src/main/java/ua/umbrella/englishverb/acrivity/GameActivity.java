@@ -1,9 +1,11 @@
-package ua.umbrella.englishverb;
+package ua.umbrella.englishverb.acrivity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ua.umbrella.englishverb.R;
 
 
 public class GameActivity extends Activity {

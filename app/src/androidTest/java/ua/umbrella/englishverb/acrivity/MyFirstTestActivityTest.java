@@ -1,10 +1,9 @@
-package ua.umbrella.englishverb;
+package ua.umbrella.englishverb.acrivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
 import ua.umbrella.englishverb.R;
-import ua.umbrella.englishverb.GameActivity;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
