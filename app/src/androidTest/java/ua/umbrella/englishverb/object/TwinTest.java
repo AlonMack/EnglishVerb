@@ -23,9 +23,14 @@ public class TwinTest extends ApplicationTestCase<Application>
     assertEquals("рус11", TwinFixture.getTwin1().getRussian());
   }
 
+  public void test_getId()
+  {
+    assertEquals(1, TwinFixture.getTwin1().getId());
+  }
+
   public void test_equals()
   {
     Twin twin = TwinFixture.getTwin1();
-    assertTrue(TwinFixture.getTwin1().equals(new Twin(twin.getEnglish(), twin.getRussian())));
+    assertTrue(TwinFixture.getTwin1().equals(new Twin(twin.getId(), twin.getEnglish(), twin.getRussian())));
   }
 }

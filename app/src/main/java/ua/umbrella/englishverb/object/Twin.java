@@ -2,6 +2,7 @@ package ua.umbrella.englishverb.object;
 
 public class Twin
 {
+  private int id;
   private String english;
   private String russian;
 
@@ -9,10 +10,21 @@ public class Twin
   {
   }
 
-  public Twin(String english, String russian)
+  public Twin(int id, String english, String russian)
   {
+    this.id = id;
     this.english = english;
     this.russian = russian;
+  }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
   }
 
   public String getEnglish()
@@ -43,7 +55,7 @@ public class Twin
 
     Twin twin = (Twin) o;
 
-    return english.equals(twin.english) && russian.equals(twin.russian);
+    return id == twin.id && english.equals(twin.english) && russian.equals(twin.russian);
   }
 
   @Override
@@ -51,6 +63,7 @@ public class Twin
   {
     int result = english.hashCode();
     result = 31 * result + russian.hashCode();
+    result = 31 * result + id;
     return result;
   }
 }

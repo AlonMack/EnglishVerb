@@ -10,54 +10,54 @@ public class TwinFixture
   //---------------------------------
   public static Twin getTwin1()
   {
-    return new Twin("english1", "рус11");
+    return new Twin(1, "english1", "рус11");
   }
   public static Twin getTwin2()
   {
-    return new Twin("english1", "рус12");
+    return new Twin(2, "english1", "рус12");
   }
 
   //--------------------------------
   public static Twin getTwin3()
   {
-    return new Twin("english2", "рус21");
+    return new Twin(3, "english2", "рус21");
   }
   public static Twin getTwin4()
   {
-    return new Twin("english2", "рус22");
+    return new Twin(4, "english2", "рус22");
   }
   public static Twin getTwin5()
   {
-    return new Twin("english2", "рус23");
+    return new Twin(5, "english2", "рус23");
   }
 
   //---------------------------------
   public static Twin getTwin6()
   {
-    return new Twin("english3", "рус31");
+    return new Twin(6, "english3", "рус31");
   }
   public static Twin getTwin7()
   {
-    return new Twin("english3", "рус32");
+    return new Twin(7, "english3", "рус32");
   }
 
   //---------------------------------
   public static Twin getTwin8()
   {
-    return new Twin("english4", "рус41");
+    return new Twin(8, "english4", "рус41");
   }
 
   //---------------------------------
 
   public static Twin getTwin9()
   {
-    return new Twin("english5", "рус41");
+    return new Twin(9, "english5", "рус41");
   }
   //---------------------------------
 
   public static Twin getTwin10()
   {
-    return new Twin("english5", "рус51");
+    return new Twin(10, "english5", "рус51");
   }
   //---------------------------------
 
