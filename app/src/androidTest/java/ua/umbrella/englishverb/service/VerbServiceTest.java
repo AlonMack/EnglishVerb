@@ -82,11 +82,16 @@ public class VerbServiceTest extends ApplicationTestCase<Application>
     assertFalse(verbService.isCorrectVariant("english1", "рус21"));
   }
 
-  public void test_get_new_chapter_if_word_is_true()
+  public void test_getAllTwins()
   {
-    assertTrue(verbService.isCorrectVariant("english1", "рус11"));
+//    assertEquals(Sets.newHashSet(new Twin()), verbService.getAllTwins());
   }
 
+//  public void test_get_new_chapter_if_word_is_true()
+//  {
+//    fail();
+//  }
+//
 //  public void test_not_get_new_chapter_if_word_is_false()
 //  {
 //    fail();

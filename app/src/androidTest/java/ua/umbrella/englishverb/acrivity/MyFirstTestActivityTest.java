@@ -24,7 +24,7 @@ public class MyFirstTestActivityTest
   {
     super.setUp();
     mFirstTestActivity = getActivity();
-    mFirstTestText = (TextView) mFirstTestActivity.findViewById(R.id.tv);
+    mFirstTestText = (TextView) mFirstTestActivity.findViewById(R.id.english);
   }
 
   public void testPreconditions()

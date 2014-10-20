@@ -48,7 +48,7 @@ public class VerbService
 
   public Twin getTwin()
   {
-    int size = getAllVerbs().size();
+    int size = getAllTwins().size();
     return verbDao.getTwinById(1+new Random().nextInt(size));
   }
 
@@ -63,22 +63,26 @@ public class VerbService
 
   public Set<String> getAllRussianWords()
   {
-    Set<Verb> verbSet = getAllVerbs();
+    Set<Twin> twinSet = getAllTwins();
     Set<String> russians = new HashSet<String>();
-    for (Verb verb : verbSet)
-      russians.addAll(verb.getRussianList());
+    for (Twin twin : twinSet)
+      russians.add(twin.getRussian());
     return russians;
   }
 
-  public List<String> getRussianWordsForChapter(Twin twin)
+  public List<String> getRussianWordsForChapter(Twin correctTwin)
   {
-    String english = twin.getEnglish();
+    String english = correctTwin.getEnglish();
     List<String> russians = new ArrayList<String>();
-    for (Verb verb : getAllVerbs())
-      if (! verb.getEnglish().equals(english))
-        russians.addAll(verb.getRussianList());
+    Twin twin;
+    while(russians.size() < 4)
+    {
+      twin = verbService.getTwin();
+      if (! twin.getEnglish().equals(english) && ! russians.contains(twin.getRussian()))
+        russians.add(twin.getRussian());
+    }
     int rand = new Random().nextInt(russians.size());
-    russians.set(rand, twin.getRussian());
+    russians.set(rand, correctTwin.getRussian());
     return russians;
   }
 
@@ -87,5 +91,10 @@ public class VerbService
     Verb verb = getVerbByEnglish(english);
 
     return verb.getRussianList().contains(russian);
+  }
+
+  public Set<Twin> getAllTwins()
+  {
+    return verbDao.getAllTwins();
   }
 }
