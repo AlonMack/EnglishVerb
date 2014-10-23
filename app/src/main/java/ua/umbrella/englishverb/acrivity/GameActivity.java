@@ -26,6 +26,8 @@ public class GameActivity extends Activity implements View.OnClickListener
   Button button3;
   Button button4;
   TextView english;
+  TextView score;
+  Integer valueScore;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -36,6 +38,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     verbService = VerbService.getVerbService();
 
     english = (TextView) findViewById(R.id.english);
+    score = (TextView) findViewById(R.id.score);
 
     button1 = (Button) findViewById(R.id.russian1);
     button2 = (Button) findViewById(R.id.russian2);
@@ -45,6 +48,8 @@ public class GameActivity extends Activity implements View.OnClickListener
     button2.setOnClickListener(this);
     button3.setOnClickListener(this);
     button4.setOnClickListener(this);
+    valueScore = 0;
+    score.setText(valueScore.toString());
     newChapter();
   }
 
@@ -52,7 +57,11 @@ public class GameActivity extends Activity implements View.OnClickListener
   public void onClick(View view)
   {
     if(((Button) view).getText().toString().equals(twin.getRussian()))
+    {
+      valueScore ++;
       newChapter();
+      score.setText(valueScore.toString());
+    }
   }
 
   public void newChapter()

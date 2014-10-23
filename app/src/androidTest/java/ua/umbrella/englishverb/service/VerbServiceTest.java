@@ -76,12 +76,6 @@ public class VerbServiceTest extends ApplicationTestCase<Application>
     );
   }
 
-  public void test_is_correct_variant()
-  {
-    assertTrue(verbService.isCorrectVariant("english1", "рус11"));
-    assertFalse(verbService.isCorrectVariant("english1", "рус21"));
-  }
-
   public void test_getAllTwins()
   {
 //    assertEquals(Sets.newHashSet(new Twin()), verbService.getAllTwins());

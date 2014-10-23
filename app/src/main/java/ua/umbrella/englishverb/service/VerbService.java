@@ -77,20 +77,13 @@ public class VerbService
     Twin twin;
     while(russians.size() < 4)
     {
-      twin = verbService.getTwin();
+      twin =getTwin();
       if (! twin.getEnglish().equals(english) && ! russians.contains(twin.getRussian()))
         russians.add(twin.getRussian());
     }
     int rand = new Random().nextInt(russians.size());
     russians.set(rand, correctTwin.getRussian());
     return russians;
-  }
-
-  public boolean isCorrectVariant(String english, String russian)
-  {
-    Verb verb = getVerbByEnglish(english);
-
-    return verb.getRussianList().contains(russian);
   }
 
   public Set<Twin> getAllTwins()
