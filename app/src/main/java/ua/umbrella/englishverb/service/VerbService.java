@@ -1,5 +1,7 @@
 package ua.umbrella.englishverb.service;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +19,9 @@ public class VerbService
 
   private static final VerbService verbService = new VerbService();
 
-  public static VerbService getVerbService()
+  public static VerbService getVerbService(Context context)
   {
-    verbDao = VerbDao.getVerbDao();
+    verbDao = new VerbDao(context);
     return verbService;
   }
 

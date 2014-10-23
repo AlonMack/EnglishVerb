@@ -35,7 +35,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_game);
 
-    verbService = VerbService.getVerbService();
+    verbService = VerbService.getVerbService(this);
 
     english = (TextView) findViewById(R.id.english);
     score = (TextView) findViewById(R.id.score);
