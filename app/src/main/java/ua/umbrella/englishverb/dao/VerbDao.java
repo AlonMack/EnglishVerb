@@ -16,9 +16,9 @@ public class VerbDao
   private DbHelper dbHelper;
   private String[] allColumns =
       {
-          DbHelper.ID,
-          DbHelper.ENGLISH,
-          DbHelper.RUSSIAN
+          TwinTable.ID,
+          TwinTable.ENGLISH,
+          TwinTable.RUSSIAN
       };
 
   public VerbDao(Context context)
@@ -45,7 +45,7 @@ public class VerbDao
   {
     Set<Twin> twinList = new HashSet<Twin>();
     openForRead();
-    Cursor cursor = database.query(DbHelper.TABLE_VERBS, allColumns, null, null, null, null, null);
+    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, null, null, null, null, null);
     cursor.moveToFirst();
     while(! cursor.isAfterLast())
     {
@@ -62,7 +62,7 @@ public class VerbDao
   {
     Twin twin = new Twin();
     openForRead();
-    Cursor cursor = database.query(DbHelper.TABLE_VERBS, allColumns, "_id="+id, null, null, null, null);
+    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, "_id="+id, null, null, null, null);
     if (cursor.moveToFirst()){
       twin = cursorToVerb(cursor);
     }
