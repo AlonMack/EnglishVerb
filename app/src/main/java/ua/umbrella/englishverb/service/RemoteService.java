@@ -83,7 +83,6 @@ public class RemoteService
     } catch (Exception e) {
       Log.e("Buffer Error", "Error converting result " + e.toString());
     }
-    // try parse the string to a JSON object
     try {
       jo = new JSONObject(json);
     } catch (JSONException e) {

@@ -13,10 +13,11 @@ import ua.umbrella.englishverb.object.Twin;
 import ua.umbrella.englishverb.object.Verb;
 public class VerbService
 {
+  private int size = 0;
   private static VerbDao verbDao;
+  Set<Twin> twins;
 
   private VerbService(){}
-
   private static final VerbService verbService = new VerbService();
 
   public static VerbService getVerbService(Context context)
@@ -28,7 +29,9 @@ public class VerbService
   public Set<Verb> getAllVerbs()
   {
     Set<Verb> verbList = new HashSet<Verb>();
-    for (Twin twin : verbDao.getAllTwins())
+    if(null == twins)
+      twins = getAllTwins();
+    for (Twin twin : twins)
     {
       boolean isExist = false;
       for (Verb verb : verbList)
@@ -45,12 +48,14 @@ public class VerbService
         verbList.add(verb);
       }
     }
+
     return verbList;
   }
 
   public Twin getTwin()
   {
-    int size = getAllTwins().size();
+    if (size == 0)
+      size = getAllTwins().size();
     return verbDao.getTwinById(1+new Random().nextInt(size));
   }
 
@@ -79,7 +84,7 @@ public class VerbService
     Twin twin;
     while(russians.size() < 4)
     {
-      twin =getTwin();
+      twin = getTwin();
       if (! twin.getEnglish().equals(english) && ! russians.contains(twin.getRussian()))
         russians.add(twin.getRussian());
     }

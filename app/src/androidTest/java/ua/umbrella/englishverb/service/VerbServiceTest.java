@@ -26,7 +26,7 @@ public class VerbServiceTest extends ApplicationTestCase<Application>
   @Override
   protected void setUp() throws Exception
   {
-     verbService = VerbService.getVerbService();
+//     verbService = VerbService.getVerbService();
   }
 
   public void test_getAllVerbs_size()

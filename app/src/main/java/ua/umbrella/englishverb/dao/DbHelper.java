@@ -25,10 +25,9 @@ public class DbHelper extends SQLiteOpenHelper
   public void onCreate(SQLiteDatabase database)
   {
     TwinTable.onCreate(database);
-    Log.w("","");
     RemoteService remoteService = new RemoteService();
-    List<Twin> t = remoteService.getTwinsFromJson();
-    for(Twin twin : t)
+    List<Twin> twinList = remoteService.getTwinsFromJson();
+    for(Twin twin : twinList)
     {
       ContentValues values = new ContentValues();
       values.put(TwinTable.ID, twin.getId());
@@ -36,8 +35,6 @@ public class DbHelper extends SQLiteOpenHelper
       values.put(TwinTable.RUSSIAN, twin.getRussian());
       database.insert(TwinTable.TABLE_TWINS, null, values);
     }
-
-//    database.close();
   }
 
   @Override

@@ -16,16 +16,16 @@ import ua.umbrella.englishverb.service.VerbService;
 
 public class GameActivity extends Activity implements View.OnClickListener
 {
-  VerbService verbService;
-  Twin twin;
+  private VerbService verbService;
+  private Twin twin;
 
-  Button button1;
-  Button button2;
-  Button button3;
-  Button button4;
-  TextView english;
-  TextView score;
-  Integer valueScore;
+  private Button button1;
+  private Button button2;
+  private Button button3;
+  private Button button4;
+  private TextView english;
+  private TextView score;
+  private Integer valueScore;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +51,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     button4.setOnClickListener(this);
     valueScore = 0;
     score.setText(valueScore.toString());
-    newChapter();
+    newLap();
   }
 
   @Override
@@ -60,12 +60,12 @@ public class GameActivity extends Activity implements View.OnClickListener
     if(((Button) view).getText().toString().equals(twin.getRussian()))
     {
       valueScore ++;
-      newChapter();
+      newLap();
       score.setText(valueScore.toString());
     }
   }
 
-  public void newChapter()
+  public void newLap()
   {
     twin = verbService.getTwin();
     english.setText(twin.getEnglish());
