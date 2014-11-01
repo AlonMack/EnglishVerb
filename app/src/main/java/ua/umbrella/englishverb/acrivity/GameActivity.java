@@ -1,6 +1,7 @@
 package ua.umbrella.englishverb.acrivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
@@ -57,30 +58,25 @@ public class GameActivity extends Activity implements View.OnClickListener
     button4.setOnClickListener(this);
     valueScore = 0;
     score.setText(valueScore.toString());
-    new CountDownTimer(60000, 10) { // adjust the milli seconds here
-
-      public void onTick(long millisUntilFinished) {
-        time.setText(""+String.format(FORMAT,
-            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
-            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
-            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) - TimeUnit.SECONDS.toMillis(
-                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))));
-      }
-
-      public void onFinish() {
-        time.setText("done!");
-      }
-    }.start();
+    startTimer();
     newLap();
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data)
+  {
+    if (data == null) return;
+    score.setText("0");
+    valueScore = 0;
+    startTimer();
   }
 
   @Override
   public void onClick(View view)
   {
-    if(((Button) view).getText().toString().equals(twin.getRussian()))
+    if (((Button) view).getText().toString().equals(twin.getRussian()))
     {
-      valueScore ++;
+      valueScore++;
       newLap();
       score.setText(valueScore.toString());
     }
@@ -95,5 +91,29 @@ public class GameActivity extends Activity implements View.OnClickListener
     button2.setText(russians.get(1));
     button3.setText(russians.get(2));
     button4.setText(russians.get(3));
+  }
+
+  public void startTimer()
+  {
+    new CountDownTimer(6000, 10)
+    { // adjust the milli seconds here
+
+      public void onTick(long millisUntilFinished)
+      {
+        time.setText("" + String.format(FORMAT,
+            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
+            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) - TimeUnit.SECONDS.toMillis(
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))));
+      }
+
+      public void onFinish()
+      {
+        Intent intent = new Intent(GameActivity.this, FinishDialogActivity.class);
+        intent.putExtra("scope", score.getText());
+        startActivityForResult(intent, 1);
+      }
+    }.start();
   }
 }
