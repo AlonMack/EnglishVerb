@@ -16,12 +16,12 @@ import ua.umbrella.englishverb.object.Verb;
  */
 public class VerbServiceTest extends ApplicationTestCase<Application>
 {
+  VerbService verbService;
+
   public VerbServiceTest()
   {
     super(Application.class);
   }
-
-  VerbService verbService;
 
   @Override
   protected void setUp() throws Exception
@@ -31,13 +31,13 @@ public class VerbServiceTest extends ApplicationTestCase<Application>
 
   public void test_getAllVerbs_size()
   {
-    assertEquals(5, verbService.getAllVerbs().size() );
+    assertEquals(5, verbService.getAllVerbs().size());
   }
 
   public void test_getAllVerbs_russianList_is_not_empty()
   {
     for (Verb verb : verbService.getAllVerbs())
-       assertTrue(verb.getRussianList().size() > 0);
+      assertTrue(verb.getRussianList().size() > 0);
   }
 
   public void test_getTwinById()
@@ -57,13 +57,13 @@ public class VerbServiceTest extends ApplicationTestCase<Application>
   public void test_getAllRussianWords()
   {
     Set<String> russianSet = verbService.getAllRussianWords();
-    assertEquals(Sets.newHashSet("рус11", "рус12","рус21", "рус22", "рус23", "рус31", "рус32", "рус41", "рус51"), russianSet);
+    assertEquals(Sets.newHashSet("рус11", "рус12", "рус21", "рус22", "рус23", "рус31", "рус32", "рус41", "рус51"), russianSet);
   }
 
   public void test_check_divers_position_for_true_word()
   {
     Twin twin = verbService.getTwin();
-    List<String> russianList1= verbService.getRussianWordsForChapter(twin);
+    List<String> russianList1 = verbService.getRussianWordsForChapter(twin);
 
     List<String> russianList2 = verbService.getRussianWordsForChapter(twin);
 

@@ -8,6 +8,7 @@ public class VerbFixture
   {
     return new Verb("english1", Sets.newHashSet("рус11"));
   }
+
   public static Verb getVerb2()
   {
     return new Verb("english2", Sets.newHashSet("рус21", "рус22"));

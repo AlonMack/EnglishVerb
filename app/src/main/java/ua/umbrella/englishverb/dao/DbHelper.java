@@ -26,7 +26,7 @@ public class DbHelper extends SQLiteOpenHelper
     TwinTable.onCreate(database);
     RemoteService remoteService = new RemoteService();
     List<Twin> twinList = remoteService.getTwinsFromJson();
-    for(Twin twin : twinList)
+    for (Twin twin : twinList)
     {
       ContentValues values = new ContentValues();
       values.put(TwinTable.ID, twin.getId());

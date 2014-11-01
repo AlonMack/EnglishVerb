@@ -23,26 +23,25 @@ import ua.umbrella.englishverb.object.Twin;
 
 public class RemoteService
 {
-  private static String url = "http://englishverb-alonmack.rhcloud.com/get";
-
   private static final String TAG_TWIN = "twins";
   private static final String TAG_ID = "id";
   private static final String TAG_ENGLISH = "english";
   private static final String TAG_RUSSIAN = "russian";
-
   static InputStream inputStream = null;
   static JSONObject jo = null;
   static String json = "";
-
+  private static String url = "http://englishverb-alonmack.rhcloud.com/get";
   JSONArray ja = null;
   List<Twin> twin;
 
-  public List<Twin> getTwinsFromJson() {
+  public List<Twin> getTwinsFromJson()
+  {
     JSONObject json = getJson(url);
     twin = new ArrayList<Twin>();
-    try {
+    try
+    {
       ja = json.getJSONArray(TAG_TWIN);
-      for(int i=0; i< ja.length(); i++)
+      for (int i = 0; i < ja.length(); i++)
       {
         JSONObject c = ja.getJSONObject(i);
         int id = c.getInt(TAG_ID);
@@ -50,42 +49,53 @@ public class RemoteService
         String russian = c.getString(TAG_RUSSIAN);
         twin.add(new Twin(id, english, russian));
       }
-    } catch (JSONException e) {
+    } catch (JSONException e)
+    {
       e.printStackTrace();
     }
     return twin;
   }
 
-  private JSONObject getJson(String url) {
-    try {
+  private JSONObject getJson(String url)
+  {
+    try
+    {
       DefaultHttpClient httpClient = new DefaultHttpClient();
       HttpPost httpPost = new HttpPost(url);
       HttpResponse httpResponse = httpClient.execute(httpPost);
       HttpEntity httpEntity = httpResponse.getEntity();
       inputStream = httpEntity.getContent();
-    } catch (UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e)
+    {
       e.printStackTrace();
-    } catch (ClientProtocolException e) {
+    } catch (ClientProtocolException e)
+    {
       e.printStackTrace();
-    } catch (IOException e) {
+    } catch (IOException e)
+    {
       e.printStackTrace();
     }
-    try {
+    try
+    {
       BufferedReader reader = new BufferedReader(
           new InputStreamReader(inputStream, "UTF-8"), 8);
       StringBuilder sb = new StringBuilder();
       String line;
-      while ((line = reader.readLine()) != null) {
+      while ((line = reader.readLine()) != null)
+      {
         sb.append(line);
       }
       inputStream.close();
       json = "{ \"twins\" : " + sb.toString() + " }";
-    } catch (Exception e) {
+    } catch (Exception e)
+    {
       Log.e("Buffer Error", "Error converting result " + e.toString());
     }
-    try {
+    try
+    {
       jo = new JSONObject(json);
-    } catch (JSONException e) {
+    } catch (JSONException e)
+    {
       Log.e("JSON Parser", "Error parsing data " + e.toString());
     }
     return jo;

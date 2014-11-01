@@ -11,14 +11,17 @@ import java.util.Set;
 import ua.umbrella.englishverb.dao.VerbDao;
 import ua.umbrella.englishverb.object.Twin;
 import ua.umbrella.englishverb.object.Verb;
+
 public class VerbService
 {
-  private int size = 0;
+  private static final VerbService verbService = new VerbService();
   private static VerbDao verbDao;
   Set<Twin> twins;
+  private int size = 0;
 
-  private VerbService(){}
-  private static final VerbService verbService = new VerbService();
+  private VerbService()
+  {
+  }
 
   public static VerbService getVerbService(Context context)
   {
@@ -29,7 +32,7 @@ public class VerbService
   public Set<Verb> getAllVerbs()
   {
     Set<Verb> verbList = new HashSet<Verb>();
-    if(null == twins)
+    if (null == twins)
       twins = getAllTwins();
     for (Twin twin : twins)
     {
@@ -40,7 +43,7 @@ public class VerbService
           verb.addRussian(twin.getRussian());
           isExist = true;
         }
-      if(! isExist)
+      if (!isExist)
       {
         Verb verb = new Verb();
         verb.setEnglish(twin.getEnglish());
@@ -56,14 +59,14 @@ public class VerbService
   {
     if (size == 0)
       size = getAllTwins().size();
-    return verbDao.getTwinById(1+new Random().nextInt(size));
+    return verbDao.getTwinById(1 + new Random().nextInt(size));
   }
 
   public Verb getVerbByEnglish(String english)
   {
     for (Verb verb : getAllVerbs())
-      if(english.equals(verb.getEnglish()))
-       return verb;
+      if (english.equals(verb.getEnglish()))
+        return verb;
 
     return null;
   }
@@ -82,10 +85,10 @@ public class VerbService
     String english = correctTwin.getEnglish();
     List<String> russians = new ArrayList<String>();
     Twin twin;
-    while(russians.size() < 4)
+    while (russians.size() < 4)
     {
       twin = getTwin();
-      if (! twin.getEnglish().equals(english) && ! russians.contains(twin.getRussian()))
+      if (!twin.getEnglish().equals(english) && !russians.contains(twin.getRussian()))
         russians.add(twin.getRussian());
     }
     int rand = new Random().nextInt(russians.size());

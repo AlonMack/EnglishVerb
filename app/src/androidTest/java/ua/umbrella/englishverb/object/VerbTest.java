@@ -22,7 +22,7 @@ public class VerbTest extends ApplicationTestCase<Application>
 
   public void test_getRussian()
   {
-    assertEquals( Sets.newHashSet("рус21", "рус22"), VerbFixture.getVerb2().getRussianList());
+    assertEquals(Sets.newHashSet("рус21", "рус22"), VerbFixture.getVerb2().getRussianList());
   }
 
   public void test_equals()

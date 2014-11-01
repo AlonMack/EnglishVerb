@@ -47,7 +47,7 @@ public class VerbDao
     openForRead();
     Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, null, null, null, null, null);
     cursor.moveToFirst();
-    while(! cursor.isAfterLast())
+    while (!cursor.isAfterLast())
     {
       Twin twin = cursorToVerb(cursor);
       twinList.add(twin);
@@ -62,8 +62,9 @@ public class VerbDao
   {
     Twin twin = new Twin();
     openForRead();
-    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, "_id="+id, null, null, null, null);
-    if (cursor.moveToFirst()){
+    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, "_id=" + id, null, null, null, null);
+    if (cursor.moveToFirst())
+    {
       twin = cursorToVerb(cursor);
     }
     cursor.close();
