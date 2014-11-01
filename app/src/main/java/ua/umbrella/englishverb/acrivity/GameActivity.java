@@ -2,12 +2,14 @@ package ua.umbrella.englishverb.acrivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ua.umbrella.englishverb.R;
 import ua.umbrella.englishverb.object.Twin;
@@ -16,6 +18,8 @@ import ua.umbrella.englishverb.service.VerbService;
 
 public class GameActivity extends Activity implements View.OnClickListener
 {
+
+  private static final String FORMAT = "%02d:%02d:%03d";
   private VerbService verbService;
   private Twin twin;
 
@@ -25,6 +29,7 @@ public class GameActivity extends Activity implements View.OnClickListener
   private Button button4;
   private TextView english;
   private TextView score;
+  private TextView time;
   private Integer valueScore;
 
   @Override
@@ -40,6 +45,7 @@ public class GameActivity extends Activity implements View.OnClickListener
 
     english = (TextView) findViewById(R.id.english);
     score = (TextView) findViewById(R.id.score);
+    time = (TextView) findViewById(R.id.time);
 
     button1 = (Button) findViewById(R.id.russian1);
     button2 = (Button) findViewById(R.id.russian2);
@@ -51,6 +57,21 @@ public class GameActivity extends Activity implements View.OnClickListener
     button4.setOnClickListener(this);
     valueScore = 0;
     score.setText(valueScore.toString());
+    new CountDownTimer(60000, 10) { // adjust the milli seconds here
+
+      public void onTick(long millisUntilFinished) {
+        time.setText(""+String.format(FORMAT,
+            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
+            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) - TimeUnit.SECONDS.toMillis(
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))));
+      }
+
+      public void onFinish() {
+        time.setText("done!");
+      }
+    }.start();
     newLap();
   }
 

@@ -2,9 +2,6 @@ package ua.umbrella.englishverb.object;
 
 import com.google.common.collect.Sets;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class VerbFixture
 {
   public static Verb getVerb1()
