@@ -11,8 +11,17 @@
     android:label="@string/app_name"
     android:theme="@style/AppTheme">
     <activity
-      android:name=".acrivity.GameActivity"
+      android:name="ua.umbrella.englishverb.acrivity.GameActivity"
       android:label="@string/app_name">
+    </activity>
+    <activity
+      android:name="ua.umbrella.englishverb.acrivity.FinishDialogActivity"
+      android:label="@string/title_activity_finish_dialog"
+      android:theme="@android:style/Theme.Dialog">
+    </activity>
+    <activity
+      android:name="ua.umbrella.englishverb.acrivity.SplashActivity"
+      android:label="@string/title_activity_splash">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -20,9 +29,13 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".acrivity.FinishDialogActivity"
-      android:label="@string/title_activity_finish_dialog"
-      android:theme="@android:style/Theme.Dialog">
+      android:name="ua.umbrella.englishverb.acrivity.MainActivity"
+
+      android:label="@string/title_activity_main">
+    </activity>
+    <activity
+      android:name="ua.umbrella.englishverb.acrivity.SettingActivity"
+      android:label="@string/title_activity_setting">
     </activity>
   </application>
 
