@@ -66,9 +66,16 @@ public class GameActivity extends Activity implements View.OnClickListener
   protected void onActivityResult(int requestCode, int resultCode, Intent data)
   {
     if (data == null) return;
-    score.setText("0");
-    valueScore = 0;
-    startTimer();
+    if (data.getStringExtra("game").equals("yes"))
+    {
+      score.setText("0");
+      valueScore = 0;
+      startTimer();
+    }
+    else
+    {
+      finish();
+    }
   }
 
   @Override
@@ -104,8 +111,8 @@ public class GameActivity extends Activity implements View.OnClickListener
             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
-            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished)/100 - TimeUnit.SECONDS.toMillis(
-                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))/100));
+            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) / 100 - TimeUnit.SECONDS.toMillis(
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)) / 100));
       }
 
       public void onFinish()
