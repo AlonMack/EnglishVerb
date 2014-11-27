@@ -20,7 +20,7 @@ import ua.umbrella.englishverb.service.VerbService;
 public class GameActivity extends Activity implements View.OnClickListener
 {
 
-  private static final String FORMAT = "%02d:%02d:%03d";
+  private static final String FORMAT = "%02d:%02d:%01d";
   private VerbService verbService;
   private Twin twin;
 
@@ -104,8 +104,8 @@ public class GameActivity extends Activity implements View.OnClickListener
             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
-            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) - TimeUnit.SECONDS.toMillis(
-                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))));
+            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished)/100 - TimeUnit.SECONDS.toMillis(
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))/100));
       }
 
       public void onFinish()
