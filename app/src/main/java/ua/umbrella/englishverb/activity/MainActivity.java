@@ -1,4 +1,4 @@
-package ua.umbrella.englishverb.acrivity;
+package ua.umbrella.englishverb.activity;
 
 import android.app.Activity;
 import android.content.Intent;

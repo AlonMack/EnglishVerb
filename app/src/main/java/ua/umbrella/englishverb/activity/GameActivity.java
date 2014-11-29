@@ -1,7 +1,6 @@
-package ua.umbrella.englishverb.acrivity;
+package ua.umbrella.englishverb.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
@@ -32,6 +31,7 @@ public class GameActivity extends Activity implements View.OnClickListener
   private TextView score;
   private TextView time;
   private Integer valueScore;
+  private CountDownTimer countDownTimer;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -63,22 +63,6 @@ public class GameActivity extends Activity implements View.OnClickListener
   }
 
   @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data)
-  {
-    if (data == null) return;
-    if (data.getStringExtra("game").equals("yes"))
-    {
-      score.setText("0");
-      valueScore = 0;
-      startTimer();
-    }
-    else
-    {
-      finish();
-    }
-  }
-
-  @Override
   public void onClick(View view)
   {
     if (((Button) view).getText().toString().equals(twin.getRussian()))
@@ -100,9 +84,16 @@ public class GameActivity extends Activity implements View.OnClickListener
     button4.setText(russians.get(3));
   }
 
+  @Override
+  public void onBackPressed()
+  {
+    super.onBackPressed();
+    countDownTimer.cancel();
+  }
+
   public void startTimer()
   {
-    new CountDownTimer(6000, 10)
+    countDownTimer = new CountDownTimer(6000, 10)
     { // adjust the milli seconds here
 
       public void onTick(long millisUntilFinished)
@@ -114,13 +105,23 @@ public class GameActivity extends Activity implements View.OnClickListener
             TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) / 100 - TimeUnit.SECONDS.toMillis(
                 TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)) / 100));
       }
-
+      @Override
       public void onFinish()
       {
-        Intent intent = new Intent(GameActivity.this, FinishDialogActivity.class);
-        intent.putExtra("scope", score.getText());
-        startActivityForResult(intent, 1);
+        FinishDialog finishDialog = new FinishDialog(GameActivity.this);
+        finishDialog.setCanceledOnTouchOutside(false);
+        finishDialog.show();
       }
     }.start();
+  }
+
+  public TextView getScore()
+  {
+    return score;
+  }
+
+  public void setValueScore(Integer valueScore)
+  {
+    this.valueScore = valueScore;
   }
 }

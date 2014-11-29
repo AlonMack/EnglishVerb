@@ -1,4 +1,4 @@
-package ua.umbrella.englishverb.acrivity;
+package ua.umbrella.englishverb.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +22,7 @@ public class SplashActivity extends Activity
         try
         {
           int logoTimer = 0;
-          while (logoTimer < 5000)
+          while (logoTimer < 500)
           {
             sleep(100);
             logoTimer = logoTimer + 100;

@@ -1,4 +1,4 @@
-package ua.umbrella.englishverb.acrivity;
+package ua.umbrella.englishverb.activity;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
