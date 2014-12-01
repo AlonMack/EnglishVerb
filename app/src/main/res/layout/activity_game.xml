@@ -1,6 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/main_screen"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:splitMotionEvents="false"
               android:orientation="vertical">
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,24 +37,28 @@
     android:id="@+id/russian1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="1"/>
+    android:layout_weight="1"
+    android:background="@drawable/standard_bg"/>
 
   <Button
     android:id="@+id/russian2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="1"/>
+    android:layout_weight="1"
+    android:background="@drawable/standard_bg"/>
 
   <Button
     android:id="@+id/russian3"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="1"/>
+    android:layout_weight="1"
+    android:background="@drawable/standard_bg"/>
 
   <Button
     android:id="@+id/russian4"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_weight="1"/>
+    android:layout_weight="1"
+    android:background="@drawable/standard_bg"/>
 
 </LinearLayout>

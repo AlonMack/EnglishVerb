@@ -3,9 +3,10 @@ package ua.umbrella.englishverb.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.StrictMode;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,10 +16,8 @@ import ua.umbrella.englishverb.R;
 import ua.umbrella.englishverb.object.Twin;
 import ua.umbrella.englishverb.service.VerbService;
 
-
 public class GameActivity extends Activity implements View.OnClickListener
 {
-
   private static final String FORMAT = "%02d:%02d:%01d";
   private VerbService verbService;
   private Twin twin;
@@ -38,9 +37,6 @@ public class GameActivity extends Activity implements View.OnClickListener
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_game);
-
-    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-    StrictMode.setThreadPolicy(policy);
 
     verbService = VerbService.getVerbService(this);
 
@@ -63,14 +59,31 @@ public class GameActivity extends Activity implements View.OnClickListener
   }
 
   @Override
-  public void onClick(View view)
+  public void onClick(final View view)
   {
+    LinearLayout mainScreen = (LinearLayout) findViewById(R.id.main_screen);
+    int childrenCount = mainScreen.getChildCount();
+    for (int i = 0; i < childrenCount; i++)
+      mainScreen.getChildAt(i).setClickable(false);
     if (((Button) view).getText().toString().equals(twin.getRussian()))
     {
+      view.setBackgroundResource(R.drawable.splash_screen);
       valueScore++;
-      newLap();
+      score.setText(valueScore.toString());
+    } else
+    {
+      valueScore--;
       score.setText(valueScore.toString());
     }
+    newLap();
+    for (int i = 0; i < childrenCount; i++)
+      mainScreen.getChildAt(i).setClickable(true);
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable() {
+      public void run() {
+        view.setBackgroundResource(R.drawable.standard_bg);
+      }
+    }, 500);
   }
 
   public void newLap()
@@ -105,6 +118,7 @@ public class GameActivity extends Activity implements View.OnClickListener
             TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) / 100 - TimeUnit.SECONDS.toMillis(
                 TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)) / 100));
       }
+
       @Override
       public void onFinish()
       {
