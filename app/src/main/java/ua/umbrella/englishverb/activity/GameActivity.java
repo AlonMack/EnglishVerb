@@ -36,7 +36,7 @@ public class GameActivity extends Activity implements View.OnClickListener
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_game);
+    ActivityUtils.runActivity(this, R.layout.activity_game);
 
     verbService = VerbService.getVerbService(this);
 
@@ -107,8 +107,9 @@ public class GameActivity extends Activity implements View.OnClickListener
   public void startTimer()
   {
     countDownTimer = new CountDownTimer(6000, 10)
-    { // adjust the milli seconds here
+    {
 
+      @Override
       public void onTick(long millisUntilFinished)
       {
         time.setText("" + String.format(FORMAT,

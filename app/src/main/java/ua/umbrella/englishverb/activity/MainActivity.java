@@ -15,11 +15,10 @@ public class MainActivity extends Activity implements View.OnClickListener
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Button gameButton = (Button) findViewById(R.id.game);
-    gameButton.setOnClickListener(this);
-
+    ActivityUtils.runActivity(this, R.layout.activity_main);
+    Button beginButton = (Button) findViewById(R.id.begin);
     Button settingButton = (Button) findViewById(R.id.setting);
+    beginButton.setOnClickListener(this);
     settingButton.setOnClickListener(this);
   }
 
@@ -28,7 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener
   {
     switch (v.getId())
     {
-      case R.id.game:
+      case R.id.begin:
         startActivity(new Intent(this, GameActivity.class));
         break;
       case R.id.setting:

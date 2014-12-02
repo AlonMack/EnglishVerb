@@ -2,7 +2,6 @@ package ua.umbrella.englishverb.activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -12,12 +11,7 @@ import ua.umbrella.englishverb.R;
 
 public class FinishDialog extends Dialog implements View.OnClickListener
 {
-
-  TextView result;
-  Button buttonAgain;
-  Button buttonExit;
-  GameActivity activity;
-  Intent intent;
+  private GameActivity activity;
 
   public FinishDialog(Context context)
   {
@@ -25,15 +19,14 @@ public class FinishDialog extends Dialog implements View.OnClickListener
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.dialog_finish);
     activity = (GameActivity) context;
-    intent = activity.getIntent();
 
-    result = (TextView) findViewById(R.id.result);
+    TextView result = (TextView) findViewById(R.id.score_result);
+    Button buttonAgain = (Button) findViewById(R.id.button_again);
+    Button buttonExit = (Button) findViewById(R.id.button_exit);
 
-    buttonAgain = (Button) findViewById(R.id.button_again);
+    result.setText(((GameActivity) context).getScore().getText().toString());
     buttonAgain.setOnClickListener(this);
-    buttonExit = (Button) findViewById(R.id.button_exit);
     buttonExit.setOnClickListener(this);
-    result.setText(((GameActivity)context).getScore().getText().toString());
   }
 
   @Override
