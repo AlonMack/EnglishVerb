@@ -25,7 +25,7 @@ public class VerbService
 
   public static VerbService getVerbService(Context context)
   {
-    verbDao = new VerbDao(context);
+    verbDao = VerbDao.getVerbDao(context);
     return verbService;
   }
 

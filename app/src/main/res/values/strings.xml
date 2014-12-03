@@ -14,5 +14,8 @@
   <string name="default_score">0</string>
   <string name="try_again">Try again</string>
   <string name="exit">Exit</string>
+  <string name="label_name">Name</string>
+  <string name="label_main_word">Main word</string>
+  <string name="email">Email</string>
 
 </resources>

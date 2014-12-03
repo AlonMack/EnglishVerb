@@ -12,18 +12,18 @@ import ua.umbrella.englishverb.object.Twin;
 
 public class VerbDao
 {
+  private static final VerbDao verbDao = new VerbDao();
   private SQLiteDatabase database;
-  private DbHelper dbHelper;
-  private String[] allColumns =
+  private static DbHelper dbHelper;
+  private String[] allColumnsTwin =
       {
           TwinTable.ID,
           TwinTable.ENGLISH,
           TwinTable.RUSSIAN
       };
 
-  public VerbDao(Context context)
+  private VerbDao()
   {
-    dbHelper = new DbHelper(context);
   }
 
   public void openForWrite() throws SQLException
@@ -45,7 +45,7 @@ public class VerbDao
   {
     Set<Twin> twinList = new HashSet<Twin>();
     openForRead();
-    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, null, null, null, null, null);
+    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumnsTwin, null, null, null, null, null);
     cursor.moveToFirst();
     while (!cursor.isAfterLast())
     {
@@ -62,7 +62,7 @@ public class VerbDao
   {
     Twin twin = new Twin();
     openForRead();
-    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumns, "_id=" + id, null, null, null, null);
+    Cursor cursor = database.query(TwinTable.TABLE_TWINS, allColumnsTwin, "_id=" + id, null, null, null, null);
     if (cursor.moveToFirst())
     {
       twin = cursorToVerb(cursor);
@@ -80,5 +80,11 @@ public class VerbDao
     twin.setRussian(cursor.getString(2));
 
     return twin;
+  }
+
+  public static VerbDao getVerbDao(Context context)
+  {
+    dbHelper = new DbHelper(context);
+    return verbDao;
   }
 }
