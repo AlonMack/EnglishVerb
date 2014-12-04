@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import ua.umbrella.englishverb.R;
+import ua.umbrella.englishverb.object.Setting;
 import ua.umbrella.englishverb.object.Twin;
+import ua.umbrella.englishverb.service.SettingService;
 import ua.umbrella.englishverb.service.VerbService;
 
 public class GameActivity extends Activity implements View.OnClickListener
@@ -106,7 +108,16 @@ public class GameActivity extends Activity implements View.OnClickListener
 
   public void startTimer()
   {
-    countDownTimer = new CountDownTimer(6000, 10)
+    SettingService settingService = SettingService.getSettingService(this);
+    Setting setting = settingService.getSetting();
+    int gameTime = 0;
+    //TODO: ad break
+    switch (setting.getTime()){
+      case 0:gameTime = 120000; break;
+      case 1:gameTime = 300000; break;
+      case 2:gameTime = 600000; break;
+    }
+    countDownTimer = new CountDownTimer(gameTime, 10)
     {
 
       @Override
