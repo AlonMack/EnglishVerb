@@ -39,4 +39,16 @@ public class SettingActivity extends Activity
     mainWord.setSelection(setting.getMainWord());
     time.setSelection(setting.getTime());
   }
+
+  @Override
+  protected void onPause()
+  {
+    super.onPause();
+    SettingService settingService = SettingService.getSettingService(this);
+    Setting setting = new Setting();
+    setting.setEmail(email.getText().toString());
+    setting.setMainWord(mainWord.getSelectedItemPosition());
+    setting.setTime(time.getSelectedItemPosition());
+    settingService.updateSetting(setting);
+  }
 }

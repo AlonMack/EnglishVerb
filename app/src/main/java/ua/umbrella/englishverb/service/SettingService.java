@@ -23,4 +23,11 @@ public class SettingService
   {
     return settingDao.getSetting();
   }
+
+  public void updateSetting(Setting setting)
+  {
+    settingDao.updateSetting(setting);
+  }
+
+
 }

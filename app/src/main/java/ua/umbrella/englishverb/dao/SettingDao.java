@@ -1,5 +1,6 @@
 package ua.umbrella.englishverb.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -71,5 +72,24 @@ public class SettingDao
   {
     dbHelper = new DbHelper(context);
     return settingDao;
+  }
+
+  public void updateSetting(Setting setting)
+  {
+    ContentValues dataToInsert = new ContentValues();
+    dataToInsert.put("email", setting.getEmail());
+    dataToInsert.put("main_word", setting.getMainWord());
+    dataToInsert.put("time", setting.getTime());
+    String where = "_id=?";
+    String[] whereArgs = new String[] {String.valueOf(1)};
+    try{
+      openForWrite();
+      database.update(SettingTable.TABLE_SETTING, dataToInsert, where, whereArgs);
+      close();
+    }
+    catch (Exception e){
+      String error =  e.getMessage().toString();
+      close();
+    }
   }
 }
