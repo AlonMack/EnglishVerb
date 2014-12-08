@@ -6,7 +6,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +33,7 @@ public class GameActivity extends Activity implements View.OnClickListener
   private TextView time;
   private Integer valueScore;
   private CountDownTimer countDownTimer;
+  private long s1;
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -61,9 +62,38 @@ public class GameActivity extends Activity implements View.OnClickListener
   }
 
   @Override
+  protected void onSaveInstanceState(Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    outState.putInt("valueScore", valueScore);
+    outState.putString("english", english.getText().toString());
+    outState.putString("button1", button1.getText().toString());
+    outState.putString("button2", button2.getText().toString());
+    outState.putString("button3", button3.getText().toString());
+    outState.putString("button4", button4.getText().toString());
+    outState.putLong("time", s1);
+    countDownTimer.cancel();
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState)
+  {
+    super.onRestoreInstanceState(savedInstanceState);
+    valueScore = savedInstanceState.getInt("valueScore");
+    score.setText(valueScore.toString());
+    english.setText(savedInstanceState.getString("english"));
+    button1.setText(savedInstanceState.getString("button1"));
+    button2.setText(savedInstanceState.getString("button2"));
+    button3.setText(savedInstanceState.getString("button3"));
+    button4.setText(savedInstanceState.getString("button4"));
+    countDownTimer = new MyCount(savedInstanceState.getLong("time"), 10);
+    countDownTimer.start();
+  }
+
+  @Override
   public void onClick(final View view)
   {
-    LinearLayout mainScreen = (LinearLayout) findViewById(R.id.main_screen);
+    RelativeLayout mainScreen = (RelativeLayout) findViewById(R.id.main_screen);
     int childrenCount = mainScreen.getChildCount();
     for (int i = 0; i < childrenCount; i++)
       mainScreen.getChildAt(i).setClickable(false);
@@ -81,8 +111,10 @@ public class GameActivity extends Activity implements View.OnClickListener
     for (int i = 0; i < childrenCount; i++)
       mainScreen.getChildAt(i).setClickable(true);
     Handler handler = new Handler();
-    handler.postDelayed(new Runnable() {
-      public void run() {
+    handler.postDelayed(new Runnable()
+    {
+      public void run()
+      {
         view.setBackgroundResource(R.drawable.standard_bg);
       }
     }, 500);
@@ -111,34 +143,20 @@ public class GameActivity extends Activity implements View.OnClickListener
     SettingService settingService = SettingService.getSettingService(this);
     Setting setting = settingService.getSetting();
     int gameTime = 0;
-    //TODO: ad break
-    switch (setting.getTime()){
-      case 0:gameTime = 120000; break;
-      case 1:gameTime = 300000; break;
-      case 2:gameTime = 600000; break;
-    }
-    countDownTimer = new CountDownTimer(gameTime, 10)
+    switch (setting.getTime())
     {
-
-      @Override
-      public void onTick(long millisUntilFinished)
-      {
-        time.setText("" + String.format(FORMAT,
-            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
-            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
-            TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) / 100 - TimeUnit.SECONDS.toMillis(
-                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)) / 100));
-      }
-
-      @Override
-      public void onFinish()
-      {
-        FinishDialog finishDialog = new FinishDialog(GameActivity.this);
-        finishDialog.setCanceledOnTouchOutside(false);
-        finishDialog.show();
-      }
-    }.start();
+      case 0:
+        gameTime = 120000;
+        break;
+      case 1:
+        gameTime = 300000;
+        break;
+      case 2:
+        gameTime = 600000;
+        break;
+    }
+    countDownTimer = new MyCount(gameTime, 10);
+    countDownTimer.start();
   }
 
   public TextView getScore()
@@ -149,5 +167,33 @@ public class GameActivity extends Activity implements View.OnClickListener
   public void setValueScore(Integer valueScore)
   {
     this.valueScore = valueScore;
+  }
+
+  public class MyCount extends CountDownTimer
+  {
+    public MyCount(long millisInFuture, long countDownInterval)
+    {
+      super(millisInFuture, countDownInterval);
+    }
+
+    @Override
+    public void onFinish()
+    {
+      FinishDialog finishDialog = new FinishDialog(GameActivity.this);
+      finishDialog.setCanceledOnTouchOutside(false);
+      finishDialog.show();
+    }
+
+    @Override
+    public void onTick(long millisUntilFinished)
+    {
+      s1 = millisUntilFinished;
+      time.setText("" + String.format(FORMAT,
+          TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+          TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+              TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)),
+          TimeUnit.MILLISECONDS.toMillis(millisUntilFinished) / 100 - TimeUnit.SECONDS.toMillis(
+              TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)) / 100));
+    }
   }
 }
