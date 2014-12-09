@@ -93,29 +93,49 @@ public class GameActivity extends Activity implements View.OnClickListener
   @Override
   public void onClick(final View view)
   {
-    RelativeLayout mainScreen = (RelativeLayout) findViewById(R.id.main_screen);
-    int childrenCount = mainScreen.getChildCount();
+    final RelativeLayout mainScreen = (RelativeLayout) findViewById(R.id.main_screen);
+    final int childrenCount = mainScreen.getChildCount();
     for (int i = 0; i < childrenCount; i++)
       mainScreen.getChildAt(i).setClickable(false);
     if (((Button) view).getText().toString().equals(twin.getRussian()))
     {
-      view.setBackgroundResource(R.drawable.splash_screen);
+      view.setBackgroundResource(R.drawable.green_button);
       valueScore++;
       score.setText(valueScore.toString());
     } else
     {
+      view.setBackgroundResource(R.drawable.red_button);
+      if(twin.getRussian().equals(button1.getText()))
+        button1.setBackgroundResource(R.drawable.green_button);
+      if(twin.getRussian().equals(button2.getText()))
+        button2.setBackgroundResource(R.drawable.green_button);
+      if(twin.getRussian().equals(button3.getText()))
+        button3.setBackgroundResource(R.drawable.green_button);
+      if(twin.getRussian().equals(button4.getText()))
+        button4.setBackgroundResource(R.drawable.green_button);
       valueScore--;
       score.setText(valueScore.toString());
     }
-    newLap();
-    for (int i = 0; i < childrenCount; i++)
-      mainScreen.getChildAt(i).setClickable(true);
-    Handler handler = new Handler();
-    handler.postDelayed(new Runnable()
+    new Handler().postDelayed(new Runnable()
     {
+      @Override
       public void run()
       {
-        view.setBackgroundResource(R.drawable.standard_bg);
+        newLap();
+        for (int i = 0; i < childrenCount; i++)
+          mainScreen.getChildAt(i).setClickable(true);
+      }
+    }, 500);
+    new Handler().postDelayed(new Runnable()
+    {
+      @Override
+      public void run()
+      {
+        view.setBackgroundResource(R.drawable.blue_button);
+        button1.setBackgroundResource(R.drawable.blue_button);
+        button2.setBackgroundResource(R.drawable.blue_button);
+        button3.setBackgroundResource(R.drawable.blue_button);
+        button4.setBackgroundResource(R.drawable.blue_button);
       }
     }, 500);
   }

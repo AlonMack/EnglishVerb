@@ -8,7 +8,8 @@
   <TextView
     android:id="@+id/english"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
+    android:text="WWWWWWWWWWWWWWW"
     android:textSize="40sp"/>
 
 
@@ -47,27 +48,31 @@
       android:layout_width="fill_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@drawable/standard_bg"/>
+      android:textSize="40sp"
+      android:background="@drawable/blue_button"/>
 
     <Button
       android:id="@+id/russian2"
       android:layout_width="fill_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@drawable/standard_bg"/>
+      android:textSize="40sp"
+      android:background="@drawable/blue_button"/>
 
     <Button
       android:id="@+id/russian3"
       android:layout_width="fill_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@drawable/standard_bg"/>
+      android:textSize="40sp"
+      android:background="@drawable/blue_button"/>
 
     <Button
       android:id="@+id/russian4"
       android:layout_width="fill_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@drawable/standard_bg"/>
+      android:textSize="40sp"
+      android:background="@drawable/blue_button"/>
   </LinearLayout>
 </RelativeLayout>

@@ -11,15 +11,21 @@
 
   <Button
     android:id="@+id/begin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/begin"/>
+    android:layout_width="200dp"
+    android:layout_height="70dp"
+    android:background="@drawable/main_button"
+    android:text="@string/begin"
+    android:textSize="50sp"
+    android:layout_margin="20dp"/>
 
   <Button
     android:id="@+id/setting"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="200dp"
+    android:layout_height="70dp"
     android:layout_below="@id/begin"
-    android:text="@string/setting"/>
+    android:textSize="50sp"
+    android:background="@drawable/main_button"
+    android:text="@string/setting"
+    android:layout_margin="20dp"/>
 
 </RelativeLayout>

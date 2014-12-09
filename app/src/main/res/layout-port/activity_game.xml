@@ -8,14 +8,15 @@
   <TextView
     android:id="@+id/english"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:textSize="25sp"/>
+    android:layout_height="55dp"
+    android:textSize="35sp"
+    android:gravity="center"/>
 
 
   <LinearLayout
     android:id="@+id/score_time"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="55dp"
     android:layout_below="@+id/english"
     android:orientation="horizontal">
 
@@ -23,17 +24,19 @@
       android:id="@+id/score"
       style="@android:style/TextAppearance.Large"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textSize="25sp"
-      android:layout_weight="1"/>
+      android:layout_height="55dp"
+      android:textSize="35sp"
+      android:layout_weight="1"
+      android:gravity="center"/>
 
     <TextView
       android:id="@+id/time"
       style="@android:style/TextAppearance.Large"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textSize="25sp"
-      android:layout_weight="1"/>
+      android:layout_height="55dp"
+      android:textSize="35sp"
+      android:layout_weight="1"
+      android:gravity="center"/>
   </LinearLayout>
 
   <LinearLayout
@@ -45,28 +48,32 @@
     android:id="@+id/russian1"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
-    android:background="@drawable/standard_bg"
+    android:textSize="35sp"
+    android:background="@drawable/blue_button"
     android:layout_weight="1"/>
 
   <Button
     android:id="@+id/russian2"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
-    android:background="@drawable/standard_bg"
+    android:textSize="35sp"
+    android:background="@drawable/blue_button"
     android:layout_weight="1"/>
 
   <Button
     android:id="@+id/russian3"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
-    android:background="@drawable/standard_bg"
+    android:textSize="35sp"
+    android:background="@drawable/blue_button"
     android:layout_weight="1"/>
 
   <Button
     android:id="@+id/russian4"
     android:layout_width="fill_parent"
     android:layout_height="0dp"
-    android:background="@drawable/standard_bg"
+    android:textSize="35sp"
+    android:background="@drawable/blue_button"
     android:layout_weight="1"/>
   </LinearLayout>
 
