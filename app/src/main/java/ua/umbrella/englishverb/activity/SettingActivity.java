@@ -25,7 +25,7 @@ public class SettingActivity extends Activity
     super.onCreate(savedInstanceState);
     ActivityUtils.runActivity(this, R.layout.activity_setting);
     email = (TextView) findViewById(R.id.account_email);
-    mainWord = (Spinner) findViewById(R.id.spinner_main_word);
+//    mainWord = (Spinner) findViewById(R.id.spinner_main_word);
     time = (Spinner) findViewById(R.id.spinner_time);
   }
 
@@ -36,7 +36,7 @@ public class SettingActivity extends Activity
     SettingService settingService = SettingService.getSettingService(this);
     Setting setting = settingService.getSetting();
     email.setText(setting.getEmail());
-    mainWord.setSelection(setting.getMainWord());
+//    mainWord.setSelection(setting.getMainWord());
     time.setSelection(setting.getTime());
   }
 
@@ -47,7 +47,7 @@ public class SettingActivity extends Activity
     SettingService settingService = SettingService.getSettingService(this);
     Setting setting = new Setting();
     setting.setEmail(email.getText().toString());
-    setting.setMainWord(mainWord.getSelectedItemPosition());
+//    setting.setMainWord(mainWord.getSelectedItemPosition());
     setting.setTime(time.getSelectedItemPosition());
     settingService.updateSetting(setting);
   }

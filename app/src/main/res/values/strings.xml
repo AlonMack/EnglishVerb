@@ -17,5 +17,6 @@
   <string name="label_name">Name</string>
   <string name="label_main_word">Main word</string>
   <string name="email">Email</string>
+  <string name="game_time">Game time</string>
 
 </resources>

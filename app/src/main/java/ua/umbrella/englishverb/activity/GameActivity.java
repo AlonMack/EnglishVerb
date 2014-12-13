@@ -105,13 +105,13 @@ public class GameActivity extends Activity implements View.OnClickListener
     } else
     {
       view.setBackgroundResource(R.drawable.red_button);
-      if(twin.getRussian().equals(button1.getText()))
+      if (twin.getRussian().equals(button1.getText()))
         button1.setBackgroundResource(R.drawable.green_button);
-      if(twin.getRussian().equals(button2.getText()))
+      if (twin.getRussian().equals(button2.getText()))
         button2.setBackgroundResource(R.drawable.green_button);
-      if(twin.getRussian().equals(button3.getText()))
+      if (twin.getRussian().equals(button3.getText()))
         button3.setBackgroundResource(R.drawable.green_button);
-      if(twin.getRussian().equals(button4.getText()))
+      if (twin.getRussian().equals(button4.getText()))
         button4.setBackgroundResource(R.drawable.green_button);
       valueScore--;
       score.setText(valueScore.toString());
@@ -162,17 +162,17 @@ public class GameActivity extends Activity implements View.OnClickListener
   {
     SettingService settingService = SettingService.getSettingService(this);
     Setting setting = settingService.getSetting();
-    int gameTime = 0;
+    long gameTime = 0;
     switch (setting.getTime())
     {
       case 0:
-        gameTime = 120000;
+        gameTime = 12000;
         break;
       case 1:
-        gameTime = 300000;
+        gameTime = 30000;
         break;
       case 2:
-        gameTime = 600000;
+        gameTime = 60000;
         break;
     }
     countDownTimer = new MyCount(gameTime, 10);
