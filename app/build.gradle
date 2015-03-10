@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "ua.umbrella.englishverb"
@@ -19,7 +20,17 @@ android {
     }
 }
 
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName "ua.umbrella.englishverb"
+    }
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    apt "org.androidannotations:androidannotations:3.2"
+    compile "org.androidannotations:androidannotations-api:3.2"
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

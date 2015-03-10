@@ -24,6 +24,7 @@ public class GameActivity extends Activity implements View.OnClickListener
   private VerbService verbService;
   private Twin twin;
 
+  FinishDialog finishDialog;
   private Button button1;
   private Button button2;
   private Button button3;
@@ -57,8 +58,14 @@ public class GameActivity extends Activity implements View.OnClickListener
     button4.setOnClickListener(this);
     valueScore = 0;
     score.setText(valueScore.toString());
-    startTimer();
     newLap();
+  }
+
+  @Override
+  protected void onResume()
+  {
+    super.onResume();
+    startTimer();
   }
 
   @Override
@@ -72,6 +79,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     outState.putString("button3", button3.getText().toString());
     outState.putString("button4", button4.getText().toString());
     outState.putLong("time", s1);
+    outState.putBoolean("dialog", null != finishDialog);
     countDownTimer.cancel();
   }
 
@@ -86,8 +94,7 @@ public class GameActivity extends Activity implements View.OnClickListener
     button2.setText(savedInstanceState.getString("button2"));
     button3.setText(savedInstanceState.getString("button3"));
     button4.setText(savedInstanceState.getString("button4"));
-    countDownTimer = new MyCount(savedInstanceState.getLong("time"), 10);
-    countDownTimer.start();
+    s1 = savedInstanceState.getLong("time");
   }
 
   @Override
@@ -175,6 +182,8 @@ public class GameActivity extends Activity implements View.OnClickListener
         gameTime = 60000;
         break;
     }
+    if (s1 > 50)
+      gameTime = s1;
     countDownTimer = new MyCount(gameTime, 10);
     countDownTimer.start();
   }
@@ -199,9 +208,10 @@ public class GameActivity extends Activity implements View.OnClickListener
     @Override
     public void onFinish()
     {
-      FinishDialog finishDialog = new FinishDialog(GameActivity.this);
+      finishDialog = new FinishDialog(GameActivity.this);
       finishDialog.setCanceledOnTouchOutside(false);
       finishDialog.show();
+      countDownTimer.cancel();
     }
 
     @Override
